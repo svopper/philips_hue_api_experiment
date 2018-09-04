@@ -13,6 +13,7 @@ func setLight(lightID int) {
 	url := fmt.Sprintf("http://192.168.1.23/api/fqaj6KtOHPSNpPzTzFy4g5rce98CIf2uAFlXbViH/lights/%d/state", lightID)
 
 	for {
+		rand.Seed(time.Now().UnixNano())
 		hue := rand.Intn(65535)
 		fmt.Printf("Light %d - hue: %d\n", lightID, hue)
 		str := fmt.Sprintf(`{"on":true, "sat":254, "bri":100,"hue":%d}`, hue)
