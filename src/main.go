@@ -37,19 +37,13 @@ func main() {
 
 	var wg sync.WaitGroup
 	wg.Add(len(lights))
-	go func() {
-		setLight(6)
-		wg.Done()
-	}()
-	time.Sleep(time.Millisecond * 200)
-	go func() {
-		setLight(1)
-		wg.Done()
-	}()
-	time.Sleep(time.Millisecond * 200)
-	go func() {
-		setLight(3)
-		wg.Done()
-	}()
+
+	for _, i := range lights {
+		go func(lightID int) {
+			setLight(lightID)
+			wg.Done()
+		}(i)
+		time.Sleep(time.Millisecond * 200)
+	}
 	wg.Wait()
 }
