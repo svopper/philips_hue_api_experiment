@@ -33,20 +33,19 @@ func setLight(ip string, lightID int) {
 }
 
 func main() {
-
 	fmt.Println(len(os.Args))
 	if len(os.Args) < 3 {
-		fmt.Println("Bad arguments. Please provide ip of Hue Bridge and at least 1 bulb id.")
+		fmt.Println("Not enough arguments. Please provide ip of Hue Bridge and at least 1 bulb id.")
 		return
 	}
+	ipAddress := os.Args[1]
 	var lights []int
+
 	for i := 2; i < len(os.Args); i++ {
 		id, err := strconv.Atoi(os.Args[i])
-
 		if err != nil {
 			panic(err)
 		}
-
 		lights = append(lights, id)
 	}
 
@@ -55,7 +54,7 @@ func main() {
 
 	for _, i := range lights {
 		go func(lightID int) {
-			setLight(os.Args[1], lightID)
+			setLight(ipAddress, lightID)
 			wg.Done()
 		}(i)
 	}
