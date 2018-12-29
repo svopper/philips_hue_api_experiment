@@ -17,7 +17,7 @@ func setLight(ip string, lightID int) {
 		rand.Seed(time.Now().UnixNano())
 		hue := rand.Intn(65535)
 		fmt.Printf("Light %d - hue: %d\n", lightID, hue)
-		body := fmt.Sprintf(`{"on":true, "sat":254, "bri":100,"hue":%d}`, hue)
+		body := fmt.Sprintf(`{"on":true, "sat":254, "bri":254,"hue":%d}`, hue)
 		jsonStr := []byte(body)
 		req, err := http.NewRequest("PUT", url, bytes.NewBuffer(jsonStr))
 
@@ -27,8 +27,8 @@ func setLight(ip string, lightID int) {
 			panic(err)
 		}
 
-		defer resp.Body.Close()
-		time.Sleep(time.Millisecond * 600)
+		resp.Body.Close()
+		time.Sleep(time.Millisecond * 200)
 	}
 }
 
