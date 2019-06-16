@@ -1,1 +1,1 @@
-# philips_hue_api_experiment
+# Philips Hue Party Mode
